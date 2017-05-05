@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">功能列表</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">
+						<div class="mui-input-row mui-checkbox">
+  							<label>我的任务</label>
+  							<input name="checkbox1" value="我的任务" type="checkbox" checked>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">
+						<div class="mui-input-row mui-checkbox">
+  							<label>事件追踪</label>
+  							<input name="checkbox1" value="事件追踪" type="checkbox">
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">
+						<div class="mui-input-row mui-checkbox">
+  							<label>基础信息</label>
+  							<input name="checkbox1" value="基础信息" type="checkbox">
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">
+						<div class="mui-input-row mui-checkbox">
+  							<label>走访巡查</label>
+  							<input name="checkbox1" value="走访巡查" type="checkbox">
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">
+						<div class="mui-input-row mui-checkbox">
+  							<label>变更记录</label>
+  							<input name="checkbox1" value="变更记录" type="checkbox">
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">
+						<div class="mui-input-row mui-checkbox">
+  							<label>日常办公</label>
+  							<input name="checkbox1" value="日常办公" type="checkbox">
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			mui.plusReady(function(){
+				
+//				var oldBack = mui.back;
+//				mui.back = function(){
+//					var idtext;
+//					var list = document.getElementById("mui-table-view");
+//					mui(".mui-table-view input").each(function() {
+//						if(this.check == true){
+//							idtext += this.value + ",";
+//						}
+//					});
+//					
+//					var mainWebView = plus.webview.getWebviewById('main.html');
+//					//触发详情页面的newsId事件
+//					mui.fire(mainWebView,'items',{
+//  					id:idtext
+//					});
+//					
+//					mui.openWindow({
+//						url:"main.html",
+//						id:"main.html"
+//					});
+//					
+//					setTimeout(function(){
+//						mui.back(oldBack);
+//					},1000)
+//				};
+			});
+		</script>
+	</body>
+
+</html>

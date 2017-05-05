@@ -1,0 +1,99 @@
+{
+	"index.html": {
+		"resources": [
+			"img/welcome.png",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"html/login.html"
+		]
+	},
+	"html/login.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"img/login_background.png",
+			"html/login.html",
+			"html/register.html",
+			"html/forgetpwd.html",
+			"js/mui.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/soapclient.js"
+		],
+		"refer": [
+			"html/login.html",
+			"html/register.html",
+			"html/forgetpwd.html",
+			"html/main.html"
+		]
+	},
+	"html/register.html": {
+		"resources": [
+			"html/login.html",
+			"css/mui.min.css",
+			"html/register.html",
+			"js/mui.min.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"html/login.html",
+			"html/register.html"
+		]
+	},
+	"html/forgetpwd.html": {
+		"resources": [
+			"html/login.html",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"html/login.html"
+		]
+	},
+	"html/value1.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"html/value2.html"
+		]
+	},
+	"html/main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"img/wtsb.png",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/mui.js"
+		],
+		"refer": [
+			"html/offcanvas-drag-left-plus-menu.html",
+			"html/morelist.html"
+		]
+	},
+	"html/offcanvas-drag-left-plus-menu.html": {
+		"resources": [
+			"img/ewm.png",
+			"img/local.png",
+			"img/personnel.png",
+			"img/ic_xbbjc.png",
+			"img/ic_sjtb.png",
+			"css/mui.min.css",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"html/morelist.html": {
+		"refer": [
+			"html/main.html"
+		],
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf"
+		]
+	}
+}

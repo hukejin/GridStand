@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">页面1</h1>
+		</header>
+		<div class="mui-content">
+		    <p>从第一面传值到第二面</p>
+		    <div>
+		    	<button type="button" class="mui-btn" onclick="firstClick()">采用自定义方式传值</button>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			mui.plusReady(function(){
+			});
+			
+			function firstClick(){
+				mui.openWindow("value2.html","value2",{
+					extras:{
+						nameHH:'黎明',
+						addressHH:'江华路'
+					}
+				})
+					
+			}
+			
+		</script>
+	</body>
+
+</html>

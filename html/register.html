@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			button{
+				width: 40%;
+			}
+			.mui-content-padded{
+				margin-top: 30px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">注册用户</h1>
+		</header>
+		<div class="mui-content">
+		    <form class="mui-input-group">
+		    	<div class="mui-input-row">
+		    		<label>用户名</label>
+		    		<input type="text" class="mui-input-clear" placeholder="请输入用户名" id="username"/>
+		    	</div>
+		    	<div class="mui-input-row">
+		    		<label>密&nbsp;&nbsp;&nbsp;码</label>
+		    		<input type="password" class="mui-input-password" placeholder="请输入密码" id="userpasswd"/>
+		    	</div>
+		    </form>
+		    <form class="mui-content-padded">
+		    	<button class="mui-btn-primary" id="register">注册</button>
+		    	<button class="mui-btn-green mui-pull-right" id="cancel">取消</button>
+		    </form>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			var nametext = document.getElementById("username");
+			var passwdtext = document.getElementById("userpasswd");
+			var namet = "",passwdt = "";
+			mui.init({
+				beforeback:function(){
+					var login = plus.webview.getWebviewById('login.html');
+					mui.fire(login,'userinfo',{
+						pname:namet,
+						ppasswd:passwdt
+					})
+					return true;
+				}
+			}
+			);
+			mui.plusReady(function(){
+			});
+			
+			document.getElementById("register").addEventListener('tap',function(){
+				namet = nametext.value;
+				if(namet == null || namet.trim() == ""){
+					mui.alert("请填写用户名","提醒","确定",function(){
+						
+					});
+					return;
+				}
+				passwdt = passwdtext.value;
+				if(passwdt == null || passwdt.trim() == ""){
+					mui.alert("请填写密码","提醒","确定",function(){
+						
+					});
+					return;
+				}
+				
+				namet = nametext.value;
+				passwdt = passwdtext.value;
+				mui.back();
+			});
+			
+			document.getElementById("cancel").addEventListener('tap',function(){
+				namet = "";
+				passwdt = "";
+				mui.back();
+			});
+			
+		</script>
+	</body>
+
+</html>

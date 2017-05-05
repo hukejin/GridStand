@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">展示传过来的值</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-table-view">
+				<div id="" class="mui-table-view-cell">
+					<label>姓名</label>
+					<input type="text" name="name" id="name" placeholder="输入姓名" />
+				</div>
+				<div id="" class="mui-table-view-cell mui-input">
+					<label>地址</label>
+					<input type="text" name="address" id="address" placeholder="输入地址" />
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				document.getElementById("name").value = self.nameHH;
+				document.getElementById("address").value = self.addressHH;
+
+				var oldBack = mui.back;
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					if(backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
+			});
+		</script>
+	</body>
+
+</html>

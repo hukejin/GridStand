@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			body,
+			.mui-content {
+				color: #fff;
+				background: #fff;
+			}
+			.mui-media{
+				padding: 0px 10px;
+			}
+			.mui-media-body{
+				text-align: center;
+			}
+			.mui-media-body>p{
+				color: #fff;
+			}
+			
+			header.mui-bar {
+				display: none;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding: 0;
+			}
+			
+			.mui-media-object {
+				width: 40px;
+				height: 40px;
+			}
+			
+			.mui-media-object.itemimg {
+				width: 20px;
+				height: 20px;
+			}
+			
+			#titlebarline{
+				background-color: #1983D1;
+				height: 80px;
+				padding: 20px;
+			}
+			
+			.mui-table-view:before{
+				height: 0px;
+			}
+			
+			.mui-table-view {
+				background: #FFFFFF;
+				color: #000000;
+				padding: 0px;
+			}
+			
+			.mui-table-view:after{
+				height: 0px;
+			}
+			
+			.mui-table-view-cell{
+				height: 60px;
+			}
+			
+			.mui-table-view-inverted .mui-table-view-cell:after {
+    			background-color: #e0e0e0;
+    		    left:0px;
+    		    
+			}
+			
+			.itemimg {
+				width: 33px;
+				height: 33px;
+				margin: 20px 10px;
+			}
+			.itemtext{
+				font-size: 15px;
+				margin-top: 28px;
+			}
+			.mui-bar{
+    			box-shadow: 0 0 1px transparent;
+    			text-align: center;
+    			margin-bottom: 10px;
+    			background: #fff;
+			}
+			
+			#close-btn{
+				width: 80%;
+			}
+			.mui-table-view-cell:last-child:after, .mui-table-view-cell:last-child:before {
+    		height: 1px;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="mui-media title" id="titlebarline">
+				<img class="mui-media-object mui-pull-left" src="../img/personnel.png" alt="头像" />
+				<img class="mui-media-object mui-pull-right ewm" src="../img/ewm.png" />
+				<div class="mui-media-body">
+					天香网格员
+					<p>天香楼网格</p>
+				</div>
+
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+				<li class="mui-table-view-cell mui-media">
+					<a href="#" class="mui-navigate-right">
+						<img src="../img/ic_sjtb.png" class="mui-pull-left itemimg"/>
+						<div class="itemtext">
+							数据同步
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="#" class="mui-navigate-right">
+						<img src="../img/ic_xbbjc.png" class="mui-pull-left itemimg"/>
+						<div class="itemtext">
+							密码修改
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="#" class="mui-navigate-right">
+						<img src="../img/local.png" class="mui-pull-left itemimg"/>
+						<div class="itemtext">
+							新版本检测
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="#" class="mui-navigate-right">
+						<img src="../img/local.png" class="mui-pull-left itemimg"/>
+						<div class="itemtext">
+							test
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="mui-bar-footer mui-bar">
+				<button type="button" class="mui-btn mui-btn-red" id="close-btn" style="text-align: center;">退出系统</button>
+			</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			//关闭back、menu按键监听，这样侧滑主界面会自动获得back和memu的按键事件，仅在主界面处理按键逻辑即可；
+			mui.init({
+				keyEventBind: {
+					backbutton: false,
+					menubutton: false
+				}
+			});
+			var main = null;
+			mui.plusReady(function() {
+				main = plus.webview.currentWebview().opener();
+			})
+
+			function closeMenu() {
+				mui.fire(main, "menu:swiperight");
+			}
+
+			//左滑显示出来的菜单，只需监听右滑，然后将菜单关闭即可；在该菜单上左滑，不做任何操作；
+			window.addEventListener("swiperight", closeMenu);
+
+			document.getElementById("close-btn").addEventListener('tap', closeMenu);
+		</script>
+	</body>
+
+</html>

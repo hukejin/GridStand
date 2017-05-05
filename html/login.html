@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style type="text/css">
+			
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-radio{
+				top: 20px;
+				font-size: 16px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			.link-area {
+				display: block;
+				margin-top: 25px;
+				text-align: center;
+			}
+			
+			.hreffont{
+				font-size: 14px;
+				font-weight: bold;
+				position: absolute;
+				margin-left: 30%;
+				top: 38%;
+			}
+			.spliter {
+				color: #bbb;
+				padding: 0px 8px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">登录</h1>
+		</header>
+		<div class="mui-content">
+			<form id='login-form' class="mui-input-group">
+				<div class="mui-input-row">
+					<label>账号</label>
+					<input id="usernametext" type="text" class="mui-input mui-input-clear" placeholder="请输入用户名" />
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input id="userpasswdtext" type="password" class="mui-input mui-input-password" placeholder="请输入密码" />
+				</div>
+			</form>
+			<form class="autoform">
+				<div class="mui-input-row mui-radio mui-left">
+					<label>自动登录</label>
+					<input name="radio1" type="radio">
+				</div> 
+			</form>
+			<div class="mui-content-padded">
+				<button type="button" class="mui-btn mui-btn-block mui-btn-primary" id="loginbtn">登录</button>
+				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+				</div>
+			</div>
+			
+			<div>
+				<input type="file" name="file" id="file" style="margin: 50px 0;"/>
+			</div>
+			
+			</div>
+			
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/soapclient.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var backButtonPress = 0;
+			mui.plusReady(function(){
+            //在登录界面点击关闭时，进行页面退出而不是返回欢迎界面,需要重写back函数
+            mui.back = function(){
+            	if(backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				backButtonPress++;
+					
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+            }
+				
+			});
+			
+			var check = true;
+			var btn = document.getElementById("loginbtn");
+			btn.addEventListener("tap",function(){
+				mui(".mui-input-group input").each(function() {
+				//若当前input为空，则alert提醒 
+				if(!this.value || this.value.trim() == "") {
+    				var label = this.previousElementSibling;
+    				mui.alert(label.innerText + "不允许为空");
+    				check = false;
+    				return false;
+				}
+				});
+				//校验通过，继续执行业务逻辑
+				if(check){
+					
+					//==================调用城管通接口有返回====================
+//					var url = "http://192.168.71.63:8080/pubcmwebservice/services/CGTService";
+//					var pl = new SOAPClientParameters();
+//					pl.add("cardid", "001:00000000");
+//					pl.add("pass", "123");
+//					SOAPClient.invoke(url, "login", pl, true, HelloTo_callBack);
+					//==================调用网格接口 调用失败=======================
+//					var user = {
+//						username:"天香楼网格员",
+//						password:"123456"
+//					}
+//					var url = "http://192.168.71.63:8080/hesc-grid/webservice/WebService";
+//					var pl = new SOAPClientParameters();
+//					pl.add("arg0","1.0");
+//					pl.add("arg1","352425060723072");
+//					pl.add("arg2","login");
+//					pl.add("arg3",JSON.stringify(user));
+//					pl.add("arg4","phone");
+//					SOAPClient.invoke(url, "getService", pl, true, HelloTo_callBack);
+					//====================调用http 成功==================================
+//					var Unit = {
+//						id:'',
+//						cName:'',
+//  	                password:'',
+//                      cType:'',
+//                      cRank:'',
+//                      cState:'',
+//                      cReferid:'',
+//                      cIsmodified:'',
+//                      groupid:'',
+//                      roleid:'',
+//                      cMsgcount:'',
+//                      cUnitid:'',
+//                      signature:''
+//					}
+//					mui.post("http://192.168.71.108:8080/wechat/weChat/getBook.json",JSON.stringify(Unit),function(data){
+//						console.log(JSON.stringify(data));
+//					},'json');
+					//=====================ajax表单多数据上传（文字+图片）===============================================
+//					var fileEl = document.getElementById("file");
+//					var fd = new FormData();
+//					fd.append("CaseTypeId","1");
+//			        fd.append("CaseMainTypeId","102");
+//			        fd.append("CaseSubTypeId","10102");
+//			        fd.append("StreetId","1");
+//			        fd.append("CommunityId","1001");
+//			        fd.append("GridId","1001");
+//			        fd.append("CellId","1");
+//			        fd.append("Address","egegeg");
+//			        fd.append("Longitude","120.111111");
+//			        fd.append("Latitude","30.111111");
+//			        fd.append("Files",fileEl.files[0]);
+//					mui.ajax("http://218.108.93.246:11233/cjy/sb",{
+//						data:fd,
+//						processData: false,
+//                  	contentType: false,
+//						dataType:'json',//服务器返回json格式数据
+//						type:'post',//HTTP请求类型
+//						timeout:10000,//超时时间设置为10秒；
+//						headers:{
+//						'authorization':'Basic Y2p5MDAxOjEyMzQ1Ng=='},
+//						success:function(data){
+//							console.log(JSON.stringify(data));
+//						},
+//						error:function(xhr,type,errorThrown){
+//							//异常处理；
+//							console.log(type);
+//						}
+//					})
+					
+					mui.openWindow(
+						{
+							url:"main.html",
+    						id:"main.html"
+						}
+					);
+				}
+			});
+			
+			
+			function HelloTo_callBack(r,msg)
+			{
+				try{
+					alert(msg.toString());
+				}catch(e){
+					alert(e.message);
+				}
+				
+			};
+			
+			document.getElementById("reg").addEventListener('tap',function(){
+				mui.openWindow({
+					url:"register.html",
+					id:"register.html"
+				});
+			});
+			
+			document.getElementById("forgetPassword").addEventListener('tap',function(){
+				mui.openWindow({
+					url:"forgetpwd.html",
+					id:"forgetpwd.html"
+				})
+			});
+			
+			var nametv = document.getElementById("usernametext");
+			var psswdtv = document.getElementById("userpasswdtext");
+			
+			window.addEventListener('userinfo',function(event){
+				var info = event.detail;
+				nametv.value = info.pname;
+				psswdtv.value = info.ppasswd;
+			});
+		</script>
+	</body>
+
+</html>
