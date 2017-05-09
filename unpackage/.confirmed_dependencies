@@ -95,5 +95,21 @@
 			"js/mui.min.js",
 			"fonts/mui.ttf"
 		]
+	},
+	"html/mytask.html": {
+		"resources": [
+			"js/mui.min.js",
+			"html/subtask.html",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"html/subtask.html"
+		]
+	},
+	"html/subtask.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
 	}
 }

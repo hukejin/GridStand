@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			header a{
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">我的任务</h1>
+		</header>
+		<div class="mui-content">
+		    
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				subpages:[{
+      			url:'subtask.html',//下拉刷新内容页面地址
+      			id:'subtask.html',//内容页面标志
+      			styles:{
+        			top:'48px',//内容页面顶部位置,需根据实际页面布局计算，若使用标准mui导航，顶部默认为48px；
+      				bottom:'0px'
+      			}
+    		}]
+			})
+		</script>
+	</body>
+
+</html>
