@@ -49,6 +49,16 @@ function SOAPClientParameters()
 		}
 		return xml;	
 	}
+	
+	this.towebservice = function(){
+		var str = "";
+		for(var p in _pl)
+		{
+			if(typeof(_pl[p]) != "function")
+				str += "<" + p + " i:type=\"d:string\">" + _pl[p].toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</" + p + ">";
+		}
+		return str;
+	}
 }
 
 function SOAPClient() {}
@@ -88,8 +98,9 @@ SOAPClient._loadWsdl = function(url, method, parameters, async, callback)
 }
 SOAPClient._onLoadWsdl = function(url, method, parameters, async, callback, req)
 {
+	console.log("req\n"+req);
 	var wsdl = req.responseXML;
-	console.log(wsdl);
+	console.log("wsdl\n"+wsdl);
 	SOAPClient_cacheWsdl[url] = wsdl;	// save a copy in cache
 	return SOAPClient._sendSoapRequest(url, method, parameters, async, callback, wsdl);
 }
@@ -97,27 +108,24 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
 {
 	// get namespace
 	var ns = (wsdl.documentElement.attributes["targetNamespace"] + "" == "undefined") ? wsdl.documentElement.attributes.getNamedItem("targetNamespace").nodeValue : wsdl.documentElement.attributes["targetNamespace"].value;
+	
+	console.log("ns\n"+ns);
 	// build SOAP request
 	var sr = 
-		"<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-        "<soap:Envelope " +
-        "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-        "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " +
-        "xmlns:enc=\"http://schemas.xmlsoap.org/soap/encoding/\" " +
-        "xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
-        "xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
-        "<soap:Body>" +
-        "<" + method + " xmlns=\"" + ns + "\">" +
-        parameters.toXml() +
-        "</" + method + "></soap:Body></soap:Envelope>";
-        
-    console.log(sr);
+        "<v:Envelope xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+        "xmlns:d=\"http://www.w3.org/2001/XMLSchema\" " +
+        "xmlns:c=\"http://schemas.xmlsoap.org/soap/encoding/\" " +
+        "xmlns:v=\"http://schemas.xmlsoap.org/soap/envelope/\"><v:Header />" +
+        "<v:Body><n0:"+method+" id=\"o0\" c:root=\"1\" xmlns:n0=\""+ns+"\">" +
+        parameters.towebservice() +
+        "</n0:getService></v:Body></v:Envelope>"
 	// send request
 	var xmlHttp = SOAPClient._getXmlHttp();
-	xmlHttp.open("POST", url, async);
+	xmlHttp.open("POST", url+"?wsdl", async);
 	var soapaction = ((ns.lastIndexOf("/") != ns.length - 1) ? ns + "/" : ns) + method;
-	xmlHttp.setRequestHeader("SOAPAction", soapaction);
+	xmlHttp.setRequestHeader("SOAPAction", /*soapaction*/"\"\"");
 	xmlHttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+	
 	if(async) 
 	{
 		xmlHttp.onreadystatechange = function() 
@@ -133,6 +141,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
 SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req)
 {
 	var o = null;
+	console.log("@@@@"+req.responseText);
 	var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
 	if(nd.length == 0)
 	{
@@ -141,8 +150,16 @@ SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req)
 	}
 	else
 		o = SOAPClient._soapresult2object(nd[0], wsdl);
-	if(callback)
-		callback(o, req.responseXML);
+	if(callback){
+		var type = req.getResponseHeader("Content-Type");
+		if(type.indexOf("xml")!=-1)
+			callback(o, req.responseXML);
+		else if(type === "application/json")
+			callback(o, JSON.toJSON(req.responseText));
+		else
+			callback(o, req.responseText);
+	}
+		
 	if(!async)
 		return o;		
 }

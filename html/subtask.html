@@ -36,10 +36,20 @@
 					},
 					up: {
 						contentrefresh: '正在加载...',
+						contentnomore:'没有更多数据了',
 						callback: pullupRefresh
 					}
 				}
 			});
+			
+			mui.ready(function(){
+				var itemcount = mui('li');
+				console.log(itemcount.length);
+				if(itemcount < 5){
+					mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
+				}
+			})
+			
 			function pulldownRefresh(){
 				setTimeout(function(){
 					var root = mui('.mui-table-view');
@@ -47,12 +57,12 @@
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 				},1000);
 			}
-			
+			var morecount = 0;
 			function pullupRefresh(){
 				setTimeout(function(){
 					var root = mui('.mui-table-view');
 					root[0].appendChild(createFragment(5,false));
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(++morecount > 3);
 				},1000);
 			}
 			

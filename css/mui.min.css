@@ -51,7 +51,8 @@ template {
 }
 
 a {
-	background: 0 0
+	background: 0 0;
+	
 }
 
 a:active,
@@ -241,6 +242,10 @@ a:active {
 .mui-content {
 	background-color: #efeff4;
 	-webkit-overflow-scrolling: touch
+}
+
+.mui-bar-nav a{
+	color: #FFFFFF;
 }
 
 .mui-bar-nav~.mui-content {

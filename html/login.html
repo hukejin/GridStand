@@ -127,19 +127,21 @@
 //					pl.add("cardid", "001:00000000");
 //					pl.add("pass", "123");
 //					SOAPClient.invoke(url, "login", pl, true, HelloTo_callBack);
-					//==================调用网格接口 调用失败=======================
+					//==================调用网格接口 调用成功=======================
+//					天香楼网格员
 //					var user = {
-//						username:"天香楼网格员",
+//						username:"天香网格员",
 //						password:"123456"
 //					}
-//					var url = "http://192.168.71.63:8080/hesc-grid/webservice/WebService";
-//					var pl = new SOAPClientParameters();
-//					pl.add("arg0","1.0");
-//					pl.add("arg1","352425060723072");
-//					pl.add("arg2","login");
-//					pl.add("arg3",JSON.stringify(user));
-//					pl.add("arg4","phone");
-//					SOAPClient.invoke(url, "getService", pl, true, HelloTo_callBack);
+					var url = "http://192.168.1.13:8280/hesc-grid/webservice/WebService";
+					var pl = new SOAPClientParameters();
+					pl.add("arg0","1.0");
+					pl.add("arg1","352425060723072");
+					pl.add("arg2","login");
+					pl.add("arg3",JSON.stringify(user));
+					pl.add("arg4","phone");
+					SOAPClient.invoke(url, "getService", pl, true, HelloTo_callBack);
+
 					//====================调用http 成功==================================
 //					var Unit = {
 //						id:'',
@@ -191,20 +193,21 @@
 //						}
 //					})
 					
-					mui.openWindow(
-						{
-							url:"main.html",
-    						id:"main.html"
-						}
-					);
+//					mui.openWindow(
+//						{
+//							url:"main.html",
+//  						id:"main.html"
+//						}
+//					);
 				}
 			});
 			
 			
 			function HelloTo_callBack(r,msg)
 			{
+				
 				try{
-					alert(msg.toString());
+					alert(msg.getElementsByTagName("return")[0].childNodes[0].nodeValue);
 				}catch(e){
 					alert(e.message);
 				}
