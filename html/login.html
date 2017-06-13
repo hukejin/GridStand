@@ -77,10 +77,6 @@
 				</div>
 			</div>
 			
-			<div>
-				<input type="file" name="file" id="file" style="margin: 50px 0;"/>
-			</div>
-			
 			</div>
 			
 		</div>
@@ -90,6 +86,13 @@
 			mui.init();
 			var backButtonPress = 0;
 			mui.plusReady(function(){
+				
+			var name = plus.storage.getItem("username");
+			if(name!=null)
+				document.getElementById("usernametext").value = name;
+			var pd = plus.storage.getItem("password");
+			if(pd!=null)
+				document.getElementById("userpasswdtext").value = pd;
             //在登录界面点击关闭时，进行页面退出而不是返回欢迎界面,需要重写back函数
             mui.back = function(){
             	if(backButtonPress > 1) {
@@ -121,18 +124,13 @@
 				//校验通过，继续执行业务逻辑
 				if(check){
 					
-					//==================调用城管通接口有返回====================
-//					var url = "http://192.168.71.63:8080/pubcmwebservice/services/CGTService";
-//					var pl = new SOAPClientParameters();
-//					pl.add("cardid", "001:00000000");
-//					pl.add("pass", "123");
-//					SOAPClient.invoke(url, "login", pl, true, HelloTo_callBack);
-					//==================调用网格接口 调用成功=======================
-//					天香楼网格员
-//					var user = {
-//						username:"天香网格员",
-//						password:"123456"
-//					}
+					/**调用网格接口 调用成功*/
+					user = {
+						username:"",
+						password:""
+					}
+					user.username = document.getElementById("usernametext").value;
+					user.password = document.getElementById("userpasswdtext").value;
 					var url = "http://192.168.1.13:8280/hesc-grid/webservice/WebService";
 					var pl = new SOAPClientParameters();
 					pl.add("arg0","1.0");
@@ -141,64 +139,6 @@
 					pl.add("arg3",JSON.stringify(user));
 					pl.add("arg4","phone");
 					SOAPClient.invoke(url, "getService", pl, true, HelloTo_callBack);
-
-					//====================调用http 成功==================================
-//					var Unit = {
-//						id:'',
-//						cName:'',
-//  	                password:'',
-//                      cType:'',
-//                      cRank:'',
-//                      cState:'',
-//                      cReferid:'',
-//                      cIsmodified:'',
-//                      groupid:'',
-//                      roleid:'',
-//                      cMsgcount:'',
-//                      cUnitid:'',
-//                      signature:''
-//					}
-//					mui.post("http://192.168.71.108:8080/wechat/weChat/getBook.json",JSON.stringify(Unit),function(data){
-//						console.log(JSON.stringify(data));
-//					},'json');
-					//=====================ajax表单多数据上传（文字+图片）===============================================
-//					var fileEl = document.getElementById("file");
-//					var fd = new FormData();
-//					fd.append("CaseTypeId","1");
-//			        fd.append("CaseMainTypeId","102");
-//			        fd.append("CaseSubTypeId","10102");
-//			        fd.append("StreetId","1");
-//			        fd.append("CommunityId","1001");
-//			        fd.append("GridId","1001");
-//			        fd.append("CellId","1");
-//			        fd.append("Address","egegeg");
-//			        fd.append("Longitude","120.111111");
-//			        fd.append("Latitude","30.111111");
-//			        fd.append("Files",fileEl.files[0]);
-//					mui.ajax("http://218.108.93.246:11233/cjy/sb",{
-//						data:fd,
-//						processData: false,
-//                  	contentType: false,
-//						dataType:'json',//服务器返回json格式数据
-//						type:'post',//HTTP请求类型
-//						timeout:10000,//超时时间设置为10秒；
-//						headers:{
-//						'authorization':'Basic Y2p5MDAxOjEyMzQ1Ng=='},
-//						success:function(data){
-//							console.log(JSON.stringify(data));
-//						},
-//						error:function(xhr,type,errorThrown){
-//							//异常处理；
-//							console.log(type);
-//						}
-//					})
-					
-//					mui.openWindow(
-//						{
-//							url:"main.html",
-//  						id:"main.html"
-//						}
-//					);
 				}
 			});
 			
@@ -207,7 +147,22 @@
 			{
 				
 				try{
-					alert(msg.getElementsByTagName("return")[0].childNodes[0].nodeValue);
+					var returnstr = JSON.parse(msg.getElementsByTagName("return")[0].childNodes[0].nodeValue);
+					console.log(msg.getElementsByTagName("return")[0].childNodes[0].nodeValue);
+					if(returnstr.code === "1"){
+						plus.storage.setItem("username",user.username);
+						plus.storage.setItem("password",user.password);
+						plus.storage.setItem("userid",returnstr.obj.id);
+						mui.openWindow({
+							url:"main.html",
+							id : "main.html",
+							extras:{
+								userid : returnstr.obj.id,
+								org    : returnstr.obj.org,
+								username:returnstr.obj.username
+							}
+						});
+					}
 				}catch(e){
 					alert(e.message);
 				}

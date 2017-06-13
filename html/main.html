@@ -67,23 +67,23 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h4 class="bartitle mui-pull-left" onclick="showMenuOrNot()">天香楼网格员</h1>
-			    <h4 class="bartitle mui-pull-right">天香楼网格</h1>	
+			<h4 id="usernametitle" class="bartitle mui-pull-left" onclick="showMenuOrNot()"></h1>
+			    <h4 id="userorg" class="bartitle mui-pull-right"></h1>	
 			</header>
 			<ul class="mui-table-view mui-grid-view mui-grid-9" id="titlegride">
-			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 title">
+			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 title" id="report.html">
 			    <a href="#">
 			        <img class="mui-media-object" src="../img/wtsb.png" alt="图片" style="width: 40px;height: 40px;"/>
 			        <div class="mui-media-body">问题上报</div>
 			    </a>
 			</li>
-			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 title">
+			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 title" id="msg.html">
 			    <a href="#">
 			        <img class="mui-media-object" src="../img/wtsb.png" alt="图片" style="width: 40px;height: 40px;"/>
 			        <div class="mui-media-body">消息中心</div>
 			    </a>
 			</li>
-			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 title">
+			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 title" id="contect.html">
 			    <a href="#">
 			        <img class="mui-media-object" src="../img/wtsb.png" alt="图片" style="width: 40px;height: 40px;"/>
 			        <div class="mui-media-body">通讯录</div>
@@ -92,55 +92,55 @@
 			</ul>
 			
 			<ul class="mui-table-view mui-grid-view mui-grid-9 content" id="gridcontent">
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="mytask">
 					<a href="#">
 						<span class="mui-icon mui-icon-home"></span>
 						<div class="mui-media-body">我的任务</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="eventlist">
 					<a href="#">
 						<span class="mui-icon mui-icon-email"><span class="mui-badge mui-badge-red">5</span></span>
 						<div class="mui-media-body">事件追踪</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="basicinfo">
 					<a href="#">
 						<span class="mui-icon mui-icon-chatbubble"></span>
 						<div class="mui-media-body">基础信息</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="visitlist">
 					<a href="#">
 						<span class="mui-icon mui-icon-location"></span>
 						<div class="mui-media-body">走访巡查</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="changelist">
 					<a href="#">
 						<span class="mui-icon mui-icon-search"></span>
 						<div class="mui-media-body">变更记录</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="office.html">
 					<a href="#">
 						<span class="mui-icon mui-icon-phone"></span>
 						<div class="mui-media-body">日常办公</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="wechat.html">
 					<a href="#">
 						<span class="mui-icon mui-icon-weixin"></span>
 						<div class="mui-media-body">即时聊天</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="friend.html">
 					<a href="#">
 						<span class="mui-icon mui-icon-chatboxes"></span>
 						<div class="mui-media-body">工作圈</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="more">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="morelist.html">
 					<a href="#">
 						<span class="mui-icon mui-icon-plusempty"></span>
 						<div class="mui-media-body">更多功能</div>
@@ -150,16 +150,8 @@
 
 		<script src="../js/mui.js"></script>
 		<script type="text/javascript">
-			
-			
-			
-			for (var i=1; i<=5; i++) { 
-    			(function timer(i) {
-        			console.log(i);
-    			})(i);
-			}
-			
-			
+			var userid;
+			var backButtonPress = 0;
 			mui.init({
 			swipeBack: false,
 			beforeback: back
@@ -180,6 +172,11 @@
 			//plusReady事件后，自动创建menu窗口；
 		mui.plusReady(function() {
 			main = plus.webview.currentWebview();
+			
+			userid = main.userid;
+			document.getElementById("usernametitle").innerText = main.username;
+			document.getElementById("userorg").innerText = main.org;
+			
 			//setTimeout的目的是等待窗体动画结束后，再执行create webview操作，避免资源竞争，导致窗口动画不流畅；
 			setTimeout(function () {
 				//侧滑菜单默认隐藏，这样可以节省内存；
@@ -275,11 +272,39 @@
 		 //menu页面向左滑动，关闭菜单；
 		window.addEventListener("menu:swipeleft", closeMenu);
 		
-		var morelist = document.getElementById("more");
-		morelist.addEventListener('tap',function(){
-			mui.openWindow({url:"morelist.html",id:"morelist"});
-		});
-		
+		//在主界面点击关闭时，进行页面退出而不是返回上层界面,需要重写back函数
+         mui.back = function(){
+            	if(backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				backButtonPress++;
+					
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1500);
+            }   
+        //绑定列表里的子项，点击进入对应 的页面
+		mui("#titlegride").on('tap','li',function(){
+			var toid = this.getAttribute("id");
+			mui.openWindow({
+				url : toid,
+				id  : toid
+			});
+		})
+		mui("#gridcontent").on('tap','li',function(){
+			var toid = this.getAttribute("id");
+			if(toid.indexOf("html") > -1){
+				mui.openWindow({
+					url : toid,
+					id  : toid
+				});
+			}else{
+				
+			}
+			
+		})
 		</script>
 	</body>
 

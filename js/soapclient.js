@@ -98,9 +98,7 @@ SOAPClient._loadWsdl = function(url, method, parameters, async, callback)
 }
 SOAPClient._onLoadWsdl = function(url, method, parameters, async, callback, req)
 {
-	console.log("req\n"+req);
 	var wsdl = req.responseXML;
-	console.log("wsdl\n"+wsdl);
 	SOAPClient_cacheWsdl[url] = wsdl;	// save a copy in cache
 	return SOAPClient._sendSoapRequest(url, method, parameters, async, callback, wsdl);
 }
@@ -109,7 +107,6 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
 	// get namespace
 	var ns = (wsdl.documentElement.attributes["targetNamespace"] + "" == "undefined") ? wsdl.documentElement.attributes.getNamedItem("targetNamespace").nodeValue : wsdl.documentElement.attributes["targetNamespace"].value;
 	
-	console.log("ns\n"+ns);
 	// build SOAP request
 	var sr = 
         "<v:Envelope xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
@@ -141,7 +138,6 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
 SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req)
 {
 	var o = null;
-	console.log("@@@@"+req.responseText);
 	var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
 	if(nd.length == 0)
 	{

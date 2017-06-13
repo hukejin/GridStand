@@ -259,7 +259,13 @@
 				],
 				"refer": [
 					"html/offcanvas-drag-left-plus-menu.html",
-					"html/morelist.html"
+					"html/morelist.html",
+					"html/msg.html",
+					"html/report.html",
+					"html/contect.html",
+					"html/office.html",
+					"html/wechat.html",
+					"html/friend.html"
 				],
 				"priority": 0
 			},
@@ -311,6 +317,41 @@
 					"css/mui.min.css",
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/msg.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/report.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/wechat.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/friend.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/office.html": {
+				"resources": [
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
