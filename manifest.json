@@ -265,7 +265,16 @@
 					"html/contect.html",
 					"html/office.html",
 					"html/wechat.html",
-					"html/friend.html"
+					"html/friend.html",
+					"html/casedeal.html",
+					"html/deathperson.html",
+					"html/moveorg.html",
+					"html/moveperson.html",
+					"html/movehouse.html",
+					"html/basicorglist.html",
+					"html/basicpersonlist.html",
+					"html/mytask.html",
+					"html/tasklist.html"
 				],
 				"priority": 0
 			},
@@ -350,6 +359,75 @@
 				"priority": 0
 			},
 			"html/office.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/casedeal.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/deathperson.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/moveperson.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/movehouse.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/moveorg.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/basicorglist.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/basicpersonlist.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [
+					"html/basicpersons.html"
+				],
+				"priority": 0
+			},
+			"html/basicpersons.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/mui.pullToRefresh.material.js",
+					"html/pullrefresh_sub.html"
+				],
+				"refer": [
+					"html/subbasicperson.html"
+				],
+				"priority": 0
+			},
+			"html/subbasicperson.html": {
 				"resources": [
 					"css/mui.min.css"
 				],

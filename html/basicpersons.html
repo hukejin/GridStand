@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		#searchname {
+			width: 30%;
+		}
+		
+		#searchID {
+			width: 68%;
+		}
+		
+		.mui-scroll-wrapper {
+			top: 100px;
+			bottom: 30px;
+		}
+		
+		.mui-row {
+			padding: 10px 5px;
+		}
+		
+		.mui-row>input {
+			background: #FFFFFF;
+		}
+		
+		.mui-bar-footer.mui-bar {
+			background: #ffffff;
+		}
+		
+		h5 {
+			color: #1983D1;
+		}
+		
+		.mui-bar-footer {
+			height: 44px;
+		}
+		
+		.mui-bar-footer .mui-btn {
+			border-radius: 10px;
+			width: 80%;
+			margin: 0px 10%;
+			background: #EC971F;
+			color: #ffffff;
+			font-size: 0.9em;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">人员列表</h1>
+		</header>
+		<script src="../js/mui.min.js"></script>
+<!--		非单纯列表，只能通过双webview的方式才能实现上下拉-->
+		<script type="text/javascript">
+			mui.init({
+				subpages: [{
+					url: 'subbasicperson.html', //下拉刷新内容页面地址
+					id: 'subbasicperson.html', //内容页面标志
+					styles: {
+						top:'48px',//内容页面顶部位置,需根据实际页面布局计算，若使用标准mui导航，顶部默认为48px；
+      					bottom:'0px'
+					}
+				}]
+			})
+		</script>
+	</body>
+
+</html>

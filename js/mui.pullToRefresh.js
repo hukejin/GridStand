@@ -31,7 +31,7 @@
 				up: {
 					auto: false,
 					offset: 100, //距离底部高度(到达该高度即触发)
-					show: false,
+					show: false,//初始化后是否展示上拉加载更多的选项
 					contentinit: '上拉显示更多',
 					contentdown: '上拉显示更多',
 					contentrefresh: '正在加载...',
@@ -339,17 +339,6 @@
 			e && e.detail && e.detail.gesture && e.detail.gesture.preventDefault();
 			this.pullUpTipsIcon.innerHTML = this.options.up.contentrefresh;
 			this.options.up.callback.apply(this);
-		},
-		pullUpIsShow: function(isshow){
-			if(!isshow){
-				this.pullUpTipsIcon.innerHTML = this.options.up.contentnomore;
-				/**加这句为了没有更多时，隐藏那个进度条*/
-				this.pullUpTips.style.visibility = "hide";
-			}else{
-				this.pullUpTipsIcon.innerHTML = this.options.up.contentdown;
-				/**加这句为了没有更多时，隐藏那个进度条*/
-				this.pullUpTips.style.visibility = "show";
-			}
 		},
 		endPullDownToRefresh: function() {
 			this.loading = false;

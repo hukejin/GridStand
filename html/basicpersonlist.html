@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">人员类型列表</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function() {
+				var list = mui(".mui-table-view")[0];
+				var mainview = plus.webview.currentWebview()
+				var htmltype = mainview.htmltype
+				if(htmltype === "0") {
+					list.innerHTML = '<li class="mui-table-view-cell" target="1"><a class="mui-navigate-right">户籍人员</a></li>' +
+						'<li class="mui-table-view-cell" target="2"><a class="mui-navigate-right">流动人员</a></li>' +
+						'<li class="mui-table-view-cell" target="3"><a class="mui-navigate-right">境外人员</a></li>'
+				} else if(htmltype === "1") {
+					list.innerHTML = '<li class="mui-table-view-cell" target="4"><a class="mui-navigate-right">刑满释放人员</a></li>' +
+						'<li class="mui-table-view-cell" target="5"><a class="mui-navigate-right">矫正人员</a></li>' +
+						'<li class="mui-table-view-cell" target="6"><a class="mui-navigate-right">精神病人员</a></li>' +
+						'<li class="mui-table-view-cell" target="7"><a class="mui-navigate-right">艾滋病危险人员</a></li>' +
+						'<li class="mui-table-view-cell" target="8"><a class="mui-navigate-right">危险品从业人员</a></li>' +
+						'<li class="mui-table-view-cell" target="9"><a class="mui-navigate-right">吸毒人员</a></li>' +
+						'<li class="mui-table-view-cell" target="10"><a class="mui-navigate-right">重点青少年人员</a></li>' +
+						'<li class="mui-table-view-cell" target="11"><a class="mui-navigate-right">重点上访人员</a></li>' +
+						'<li class="mui-table-view-cell" target="12"><a class="mui-navigate-right">重点少数民族人员</a></li>'
+				} else if(htmltype === "2") {
+					list.innerHTML = '<li class="mui-table-view-cell" target="21"><a class="mui-navigate-right">育龄妇女</a></li>' +
+						'<li class="mui-table-view-cell" target="22"><a class="mui-navigate-right">重症病人员</a></li>' +
+						'<li class="mui-table-view-cell" target="23"><a class="mui-navigate-right">孤寡老人</a></li>' +
+						'<li class="mui-table-view-cell" target="24"><a class="mui-navigate-right">残疾人员</a></li>' +
+						'<li class="mui-table-view-cell" target="25"><a class="mui-navigate-right">失独人员</a></li>' +
+						'<li class="mui-table-view-cell" target="26"><a class="mui-navigate-right">低保户</a></li>' +
+						'<li class="mui-table-view-cell" target="27"><a class="mui-navigate-right">五保户</a></li>' +
+						'<li class="mui-table-view-cell" target="28"><a class="mui-navigate-right">低收入户</a></li>' +
+						'<li class="mui-table-view-cell" target="29"><a class="mui-navigate-right">优抚对象</a></li>'
+				} else if(htmltype === "3") {
+					list.innerHTML = '<li class="mui-table-view-cell" target="31"><a class="mui-navigate-right">党员</a></li>' +
+						'<li class="mui-table-view-cell" target="32"><a class="mui-navigate-right">人大代表</a></li>' +
+						'<li class="mui-table-view-cell" target="33"><a class="mui-navigate-right">政协委员</a></li>' +
+						'<li class="mui-table-view-cell" target="34"><a class="mui-navigate-right">村居民代表</a></li>' +
+						'<li class="mui-table-view-cell" target="35"><a class="mui-navigate-right">村居民组长</a></li>'
+				}
+			})
+			mui('.mui-table-view').on('tap','li',function(){
+				var target = this.getAttribute("target")
+				mui.openWindow({
+					url:"basicpersons.html",
+					id:"basicpersons.html",
+					extras:{
+						ta:target
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

@@ -77,7 +77,16 @@
 			"html/contect.html",
 			"html/office.html",
 			"html/wechat.html",
-			"html/friend.html"
+			"html/friend.html",
+			"html/casedeal.html",
+			"html/deathperson.html",
+			"html/moveorg.html",
+			"html/moveperson.html",
+			"html/movehouse.html",
+			"html/basicorglist.html",
+			"html/basicpersonlist.html",
+			"html/mytask.html",
+			"html/tasklist.html"
 		]
 	},
 	"html/offcanvas-drag-left-plus-menu.html": {
@@ -151,6 +160,60 @@
 		]
 	},
 	"html/office.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/casedeal.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/deathperson.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/moveperson.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/movehouse.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/moveorg.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/basicorglist.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/basicpersonlist.html": {
+		"resources": [
+			"css/mui.min.css"
+		],
+		"refer": [
+			"html/basicpersons.html"
+		]
+	},
+	"html/basicpersons.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.pullToRefresh.material.js",
+			"html/pullrefresh_sub.html"
+		],
+		"refer": [
+			"html/pullrefresh_sub.html",
+			"html/subbasicperson.html"
+		]
+	},
+	"html/subbasicperson.html": {
 		"resources": [
 			"css/mui.min.css"
 		]

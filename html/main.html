@@ -7,9 +7,10 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<style type="text/css">
-			body{
+			body {
 				background-color: #F2F2F2;
 			}
+			
 			.mui-bar {
 				z-index: 0;
 			}
@@ -110,12 +111,8 @@
 						<div class="mui-media-body">基础信息</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="visitlist">
-					<a href="#">
-						<span class="mui-icon mui-icon-location"></span>
-						<div class="mui-media-body">走访巡查</div>
-					</a>
-				</li>
+				<div class="firstrowsubtitle">
+				</div>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="changelist">
 					<a href="#">
 						<span class="mui-icon mui-icon-search"></span>
@@ -134,13 +131,14 @@
 						<div class="mui-media-body">即时聊天</div>
 					</a>
 				</li>
+				<div class="secondrowsubtitle"></div>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="friend.html">
 					<a href="#">
 						<span class="mui-icon mui-icon-chatboxes"></span>
 						<div class="mui-media-body">工作圈</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="morelist.html">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 subtitle" id="morelist.html" >
 					<a href="#">
 						<span class="mui-icon mui-icon-plusempty"></span>
 						<div class="mui-media-body">更多功能</div>
@@ -152,6 +150,7 @@
 		<script type="text/javascript">
 			var userid;
 			var backButtonPress = 0;
+			var isChildTitle = false
 			mui.init({
 			swipeBack: false,
 			beforeback: back
@@ -287,13 +286,24 @@
             }   
         //绑定列表里的子项，点击进入对应 的页面
 		mui("#titlegride").on('tap','li',function(){
+			
 			var toid = this.getAttribute("id");
 			mui.openWindow({
 				url : toid,
 				id  : toid
 			});
 		})
+		var ft = mui(".firstrowsubtitle")[0];
+		var st = mui(".secondrowsubtitle")[0];
+		var iscollopse = false;//是否展开了二级菜单
+		var collopseid = ""//二级菜单相关父菜单的id
 		mui("#gridcontent").on('tap','li',function(){
+			/*二级菜单点击也会导致一级菜单响应点击，所以只能人为控制*/
+			if(isChildTitle){
+				isChildTitle = false
+				return;
+			}
+			hiddenOtherBottomLine()
 			var toid = this.getAttribute("id");
 			if(toid.indexOf("html") > -1){
 				mui.openWindow({
@@ -301,10 +311,133 @@
 					id  : toid
 				});
 			}else{
-				
+				if(toid === "eventlist"){
+					var ids=new Array("tasklist.html","tasklist.html","tasklist.html")
+					var values = new Array("待处理案件","待核查关闭","已办案件")
+					var casetypes = new Array("0","1","2")
+					showSubTitle(toid,ids,values,casetypes,true)
+				}
+				if(toid === "mytask"){
+					var ids=new Array("mytask.html","mytask.html")
+					var values = new Array("地址走访","专项走访")
+					var casetypes = new Array("0","1")
+					showSubTitle(toid,ids,values,casetypes,true)
+				}
+				if(toid === "basicinfo"){
+					var ids=new Array("basicpersonlist.html","basicpersonlist.html","basicpersonlist.html","basicpersonlist.html","basicorglist.html","basicorglist.html","basicorglist.html")
+					var values = new Array("实有人口","重点人员","关爱对象","骨干对象","企业组织","重点场所","实有房屋");
+					var casetypes = new Array("0","1","2","3","4","5","6")
+					showSubTitle(toid,ids,values,casetypes,true)
+				}
+				if(toid === "changelist"){
+					var ids=new Array("deathperson.html","moveperson.html","moveperson.html","moveorg.html","moveorg.html","movehouse.html","movehouse.html")
+					var values = new Array("死亡人员","迁入人员","迁出人员","迁入企业","迁出企业","迁入房屋","迁出房屋")
+					var casetypes = new Array("0","1","2","1","2","1","2")
+					showSubTitle(toid,ids,values,casetypes,false)
+				}
 			}
-			
 		})
+		mui(".firstrowsubtitle,.secondrowsubtitle").on('tap','li',function(){
+			isChildTitle = true
+			var toid = this.getAttribute("id");
+			var typet = this.getAttribute("target");
+			if(toid.indexOf("html") > -1){
+				mui.openWindow({
+					url : toid,
+					id  : toid,
+					extras:{
+						htmltype:typet
+					}
+				})
+			}
+		})
+		
+		/**
+		 * 添加二级菜单选项
+		 * @param {Object} ids 跳转的页面
+		 * @param {Object} values 二级菜单名称
+		 * @param {Object} types 公用页面，通过传值来区别类型
+		 */
+		function addSubtitle(ids,values,types){
+			var addDocument = '<ul class="mui-table-view mui-grid-view mui-grid-9">';
+			for (var i = 0; i < ids.length; i++) {
+				addDocument += '<li class="mui-table-view-cell mui-col-xs-4 mui-col-sm-3" id="'+ids[i]+'" target="'+types[i]+'" style="border-right-color: #bbb;background:#cecbcb;font-size:14px;color:#cecbcb><a href="#">'+values[i]+'</a></li>';
+			}
+			addDocument += '</ul>';
+			return addDocument;
+		}
+		
+		/**
+		 * 选中/非选中一级菜单时，出现蓝色选中下划线
+		 * @param {Object} id
+		 * @param {Object} isShow
+		 */
+		function showBottomLine(id,isShow){
+			var clickElemnt = document.getElementById(id)
+			if(isShow){
+				clickElemnt.style.borderBottomColor="#007AFF"
+				clickElemnt.style.borderBottomStyle = "solid"
+				clickElemnt.style.borderBottomWidth = "1px"
+				collopseid = id
+			}else{
+				clickElemnt.style.borderBottomWidth = "1px"
+				clickElemnt.style.borderBottomColor="#CECBCB"
+				clickElemnt.style.borderBottomStyle = "solid"
+				collopseid = ""
+			}
+			iscollopse = isShow
+		}
+		
+		/**
+		 * 点击某个一级菜单控制是否展开二级菜单等
+		 * @param {Object} id 点击的一级菜单id
+		 * @param {Object} ids 跳转页面
+		 * @param {Object} values 二级菜单名称
+		 * @param {Object} casetypes 二级页面跳转的类型
+		 * @param {Object} isfirstrow 是否是第一行要展示的二级菜单
+		 */
+		function showSubTitle(id,ids,values,casetypes,isfirstrow){
+			if(collopseid === id){
+				if(iscollopse){
+					if(isfirstrow)
+						ft.innerHTML = ""
+					else
+						st.innerHTML = ""
+					showBottomLine(id,false)
+				}else{
+					if(isfirstrow)
+						ft.innerHTML = addSubtitle(ids,values,casetypes)
+					else
+						st.innerHTML = addSubtitle(ids,values,casetypes)
+					showBottomLine(id,true)
+					iscollopse = true
+					collopseid = id
+					}
+			}else{
+				if(isfirstrow)
+					ft.innerHTML = addSubtitle(ids,values,casetypes)
+				else
+					st.innerHTML = addSubtitle(ids,values,casetypes)
+				showBottomLine(id,true)
+				iscollopse = true
+				collopseid = id	
+			}			
+		}
+		
+		/**
+		 * 隐藏所有的二级菜单
+		 * @param {Object} id 一级菜单的id
+		 */
+		function hiddenOtherBottomLine(id){
+			ft.innerHTML = ""
+			st.innerHTML = ""
+			var elments = mui("#gridcontent>li")
+			for (var i = 0; i < elments.length; i++) {
+				elments[i].style.borderBottomWidth = "1px"
+				elments[i].style.borderBottomColor="#CECBCB"
+				elments[i].style.borderBottomStyle = "solid"
+			}
+		}
 		</script>
 	</body>
 
