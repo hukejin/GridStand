@@ -67,7 +67,8 @@
 			"img/wtsb.png",
 			"fonts/mui.ttf",
 			"css/mui.min.css",
-			"js/mui.js"
+			"js/mui.js",
+			"js/h.js"
 		],
 		"refer": [
 			"html/offcanvas-drag-left-plus-menu.html",
@@ -214,6 +215,11 @@
 		]
 	},
 	"html/subbasicperson.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/contect.html": {
 		"resources": [
 			"css/mui.min.css"
 		]

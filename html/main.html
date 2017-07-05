@@ -36,6 +36,10 @@
 				bottom: 0px;
 			}
 			
+			.mui-table-view{
+				border-collapse: collapse;
+			}
+			
 			.mui-grid-view.mui-grid-9#titlegride {
 				border-top: 0px solid #eee;
 				border-left: 0px solid #eee;
@@ -48,6 +52,7 @@
 			}
 			
 			.mui-grid-view.mui-grid-9 .mui-table-view-cell.subtitle {
+				
 				border-right: 1px solid #CECBCB;
 				border-bottom: 1px solid #CECBCB;
 			}
@@ -63,6 +68,7 @@
 			#titlegride.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
 				color: #ffffff;
 			}
+			
 		</style>
 	</head>
 
@@ -147,6 +153,7 @@
 			</ul>
 
 		<script src="../js/mui.js"></script>
+		<script src="../js/h.js"></script>
 		<script type="text/javascript">
 			var userid;
 			var backButtonPress = 0;
@@ -361,7 +368,7 @@
 		function addSubtitle(ids,values,types){
 			var addDocument = '<ul class="mui-table-view mui-grid-view mui-grid-9">';
 			for (var i = 0; i < ids.length; i++) {
-				addDocument += '<li class="mui-table-view-cell mui-col-xs-4 mui-col-sm-3" id="'+ids[i]+'" target="'+types[i]+'" style="border-right-color: #bbb;background:#cecbcb;font-size:14px;color:#cecbcb><a href="#">'+values[i]+'</a></li>';
+				addDocument += '<li class="mui-table-view-cell mui-col-xs-4 mui-col-sm-3" id="'+ids[i]+'" target="'+types[i]+'" style="border-color: #bbb;background:#cecbcb;font-size:14px;color:#333"><a href="#">'+values[i]+'</a></li>';
 			}
 			addDocument += '</ul>';
 			return addDocument;
@@ -378,11 +385,15 @@
 				clickElemnt.style.borderBottomColor="#007AFF"
 				clickElemnt.style.borderBottomStyle = "solid"
 				clickElemnt.style.borderBottomWidth = "1px"
+				clickElemnt.style.color = "#1983D1"
+				h(clickElemnt).find('div').eq(0).css({color:'#1983D1'})
 				collopseid = id
 			}else{
 				clickElemnt.style.borderBottomWidth = "1px"
 				clickElemnt.style.borderBottomColor="#CECBCB"
 				clickElemnt.style.borderBottomStyle = "solid"
+				clickElemnt.style.color = "#797979"
+				h(clickElemnt).find('div').eq(0).css({color:'#797979'})
 				collopseid = ""
 			}
 			iscollopse = isShow
@@ -412,7 +423,8 @@
 					showBottomLine(id,true)
 					iscollopse = true
 					collopseid = id
-					}
+					drawOtherLiTop()
+				}
 			}else{
 				if(isfirstrow)
 					ft.innerHTML = addSubtitle(ids,values,casetypes)
@@ -421,7 +433,14 @@
 				showBottomLine(id,true)
 				iscollopse = true
 				collopseid = id	
-			}			
+				drawOtherLiTop()
+			}		
+		}
+		
+		function drawOtherLiTop(){
+			h('.subtitle').find('a').each(function(obj){
+				h(obj).css({'borderTop':'1px solid #CECBCB'});
+			})
 		}
 		
 		/**

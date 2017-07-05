@@ -6,13 +6,59 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-scroll-wrapper {
+				top: 45px;
+			}
+			
+			.mui-btn {
+				font-size: 16px;
+			}
+			
+			#casetype {
+				width: 100%;
+				text-align: left;
+			}
+		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">问题上报</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">问题上报</h1>
 		</header>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--这里放置真实显示的DOM内容-->
+					<button type="button" class="mui-btn mui-btn-outlined" id="casetype"><span style="color: #1983D1;">*</span>选择案件类型</button>
+					<div id="showcase"></div>
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<label><span style="color: #1983D1;">*</span>事发地点</label>
+							<input type="text" class="mui-input-clear" placeholder="请输入事发地">
+						</div>
+						<div class="mui-input-row">
+							<label><span style="color: #1983D1;">*</span>事发描述</label>
+							<input type="text" class="mui-input-clear" placeholder="请输入事件描述">
+						</div>
+						<div class="mui-input-row mui-radio mui-left">
+							<label>指派</label>
+							<input name="radio1" type="radio">
+						</div>
+						<div class="mui-input-row mui-radio mui-left">
+							<label>上报</label>
+							<input name="radio1" type="radio" checked>
+						</div>
+						<div class="mui-input-row mui-radio mui-left">
+							<label>自关闭</label>
+							<input name="radio1" type="radio">
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
