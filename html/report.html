@@ -6,18 +6,35 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
 		<style type="text/css">
 			.mui-scroll-wrapper {
 				top: 45px;
 			}
 			
 			.mui-btn {
+				top: 10px;
 				font-size: 16px;
 			}
 			
 			#casetype {
 				width: 100%;
 				text-align: left;
+			}
+			.box{
+				display: flex;
+				justify-content: space-between;
+			}
+			.box label{
+				width: 100%;
+			}
+			#reportbtn{
+				width: 90%;
+				margin: 20px 5%;
+			}
+			.mui-table-view div{
+				margin-top: 10px ;
+				margin-left: 20px;
 			}
 		</style>
 	</head>
@@ -31,37 +48,156 @@
 			<div class="mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<!--这里放置真实显示的DOM内容-->
-					<button type="button" class="mui-btn mui-btn-outlined" id="casetype"><span style="color: #1983D1;">*</span>选择案件类型</button>
-					<div id="showcase"></div>
+					<!--<button type="button" class="mui-btn mui-btn-outlined" id="casetype"><span style="color: #1983D1;">*</span> 选择案件类型</button>-->
+					<ul class="mui-table-view">
+					        <li class="mui-table-view-cell" id="type">
+					        	<a class="mui-navigate-right">
+					        		<span style="color: #1983D1;">*</span> 案件类型
+					        		<div>
+					        			<span style="color: #1983D1;text-align: center;" id="ctype"></span>
+					        		</div>
+					        		
+					        	</a>
+					            
+					        </li>
+					        <li class="mui-table-view-cell" id="maintype">
+					        	<a class="mui-navigate-right">
+					        		<span style="color: #1983D1;">*</span> 案件大类
+					        		<div>
+					        			<span style="color: #1983D1;text-align: center;" id="cmaintype"></span>
+					        		</div>
+					        	</a>
+					        </li>
+					        <li class="mui-table-view-cell" id="subtype">
+					        	<a class="mui-navigate-right">
+					        		<span style="color: #1983D1;">*</span> 案件小类
+					        		<div>
+					        			<span style="color: #1983D1;text-align: center;" id="csubtype"></span>
+					        		</div>
+					        	</a>
+					        </li>
+					        <li class="mui-table-view-cell" id="chpic">
+					        	<a class="mui-navigate-right">
+					        		<span style="color: #1983D1;">*</span> 图片选择
+					        	</a>
+					        </li>
+					    </ul>
 					<form class="mui-input-group">
 						<div class="mui-input-row">
-							<label><span style="color: #1983D1;">*</span>事发地点</label>
-							<input type="text" class="mui-input-clear" placeholder="请输入事发地">
+							<label><span style="color: #1983D1;">*</span> 事发地点</label>
+							<input type="text" class="mui-input-clear" placeholder="请输入事发地" id="caseplace">
 						</div>
 						<div class="mui-input-row">
-							<label><span style="color: #1983D1;">*</span>事发描述</label>
-							<input type="text" class="mui-input-clear" placeholder="请输入事件描述">
+							<label><span style="color: #1983D1;">*</span> 事发描述</label>
+							<input type="text" class="mui-input-clear" placeholder="请输入事件描述" id="casedesc">
 						</div>
-						<div class="mui-input-row mui-radio mui-left">
-							<label>指派</label>
-							<input name="radio1" type="radio">
-						</div>
-						<div class="mui-input-row mui-radio mui-left">
-							<label>上报</label>
-							<input name="radio1" type="radio" checked>
-						</div>
-						<div class="mui-input-row mui-radio mui-left">
-							<label>自关闭</label>
-							<input name="radio1" type="radio">
+						<div class="box">
+							<div class="mui-input-row mui-radio mui-left">
+								<label>指派</label>
+								<input name="radio1" type="radio">
+							</div>
+							<div class="mui-input-row mui-radio mui-left">
+								<label>上报</label>
+								<input name="radio1" type="radio" checked>
+							</div>
+							<div class="mui-input-row mui-radio mui-left">
+								<label>自关闭</label>
+								<input name="radio1" type="radio">
+							</div>
 						</div>
 					</form>
+					<button id="reportbtn" class="mui-btn mui-btn-primary">发送</button>
 				</div>
 			</div>
 
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
 		<script type="text/javascript">
 			mui.init()
+			var type,maintype,subtype,temptype;
+			mui('.mui-table-view').on('tap','li',function(){
+				var id = this.getAttribute("id");
+				if(id == "type"){
+					showChoose("0",types("root"));
+				}else if(id == "maintype"){
+					showChoose("1",types(type));
+				}else if(id == "subtype"){
+					showChoose("2",types(maintype));
+				}else if(id == "chpic"){
+					var btnArray = [{title:"拍照"},{title:"选取图片"}];
+					plus.nativeUI.actionSheet( {
+						cancel:"取消",
+						buttons:btnArray
+					}, function(e){
+						var index = e.index;
+						switch (index){
+							/**取消*/
+							case 0:
+								break;
+							/**拍照*/
+							case 1:
+							var camera = plus.camera.getCamera();
+							var res = camera.supportedImageResolutions[0];
+							var fmt = camera.supportedImageFormats[0];
+							console.log("Resolution: "+res+", Format: "+fmt);
+							camera.captureImage(function(path){
+								mui.alert(path);
+							},function(error){
+								mui.alert(error);
+							},{resolution:res,format:fmt,filename:"/storage/emulated/0/hesc/"})
+								break;
+							/**选择图片*/
+							case 2:
+								break;
+						}
+					}); 
+					
+				}
+			})
+			
+			var demoStr = '[{"id":"1","name":"事件","code":"001","parentid":"root"},{"id":"2","name":"部件","code":"002","parentid":"root"},{"id":"123456","name":"部件大类1","code":"002001","parentid":"2"},{"id":"12346","name":"事件大类1","code":"001001","parentid":"1"},{"id":"123444","name":"市容环境小类1","code":"001001001","parentid":"12346"},{"id":"123666","name":"部件小类1","code":"002001001","parentid":"123456"}]'; 
+			var types = function getTypes(parentType){
+				var type_s = JSON.parse(demoStr);
+				var array_type = new Array();
+				for(i=0;i<type_s.length;i++){
+					var t = type_s[i];
+					if(t.parentid == parentType){
+						array_type.push(t);
+					}
+				}
+				return array_type;
+			}
+			
+			var user = function(text,value){
+				this.value = value;
+				this.text = text;
+			}
+			function showChoose(casetype,array_type){
+				var pick = new mui.PopPicker(); 
+				var ar = new Array();
+				for(i=0;i<array_type.length;i++){
+					var t = array_type[i];
+					var u = new user(t.name,t.id);
+					ar.push(u);
+				}
+				pick.setData(ar);
+				pick.show(function(items) {
+					temptype = JSON.parse(JSON.stringify(items[0])).value;
+					if(casetype === "0"){
+						document.getElementById("ctype").innerText = JSON.parse(JSON.stringify(items[0])).text;
+						type = temptype;
+					}
+					else if(casetype === "1"){
+						document.getElementById("cmaintype").innerText = JSON.parse(JSON.stringify(items[0])).text;
+						maintype = temptype;
+					}
+					else if(casetype === "2"){
+						document.getElementById("csubtype").innerText = JSON.parse(JSON.stringify(items[0])).text;
+						subtype = temptype;
+					}
+					});
+			}
 		</script>
 	</body>
 

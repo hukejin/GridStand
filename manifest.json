@@ -340,7 +340,9 @@
 			},
 			"html/report.html": {
 				"resources": [
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css"
 				],
 				"refer": [],
 				"priority": 0
